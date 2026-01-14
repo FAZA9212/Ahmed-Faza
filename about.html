@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahmed Faza | About</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        body {
+            background-color: #050510;
+            background-image:
+                radial-gradient(circle at 15% 50%, rgba(255, 94, 98, 0.08), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(0, 188, 212, 0.05), transparent 25%);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Header / Nav */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 60px;
+            width: 100%;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff 30%, #ff5e62 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 40%;
+            height: 3px;
+            background: #ff5e62;
+            border-radius: 2px;
+        }
+
+        .nav-links {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            background: rgba(6, 17, 33, 0.85);
+            padding: 2rem 1rem;
+            border-radius: 50px;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links:hover {
+            border-color: rgba(255, 94, 98, 0.4);
+            box-shadow: 0 20px 50px rgba(255, 94, 98, 0.15);
+        }
+
+        .nav-links a {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #aab2c0;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            writing-mode: horizontal-tb;
+            text-align: center;
+            padding: 12px 25px;
+            border-radius: 30px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 94, 98, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: 0.5s;
+        }
+
+        .nav-links a:hover::before {
+            transform: translateX(100%);
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #fff;
+            background: #ff5e62;
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(255, 94, 98, 0.4);
+            font-weight: 700;
+        }
+
+        /* Main Layout */
+        main {
+            flex: 1;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 60px 100px;
+            gap: 100px;
+            position: relative;
+        }
+
+        /* Left Side - Image Box */
+        .image-container {
+            position: sticky;
+            top: 120px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 25px;
+            width: 400px;
+            /* Slightly larger canvas */
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .image-circle {
+            width: 320px;
+            height: 320px;
+            background: linear-gradient(135deg, #ff5e62, #ff9966);
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            box-shadow: 0 10px 40px rgba(255, 94, 98, 0.3);
+            position: relative;
+        }
+
+        .image-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: contrast(110%);
+        }
+
+        .image-container:hover .image-circle img {
+            transform: scale(1.08) translateY(10px);
+        }
+
+        /* Floating Badge overlap */
+        .image-container::after {
+            content: 'Since 2026';
+            position: absolute;
+            bottom: -15px;
+            right: 30px;
+            background: #fff;
+            color: #050510;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Right Side - Content */
+        .content-container {
+            max-width: 700px;
+            animation: fadeInUp 1s ease-out 0.2s backwards;
+            /* Delay for cascade */
+        }
+
+        .about-title {
+            font-size: 4.5rem;
+            /* Larger impact */
+            font-weight: 800;
+            margin-bottom: 5px;
+            line-height: 1;
+            letter-spacing: -2px;
+            background: linear-gradient(to right, #fff, #aab2c0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: #ff5e62;
+            font-weight: 600;
+            margin-bottom: 40px;
+            display: inline-block;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            position: relative;
+            padding-left: 60px;
+        }
+
+        .subtitle::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 2px;
+            background: #ff5e62;
+        }
+
+        .section-header {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fff;
+            margin-top: 60px;
+            margin-bottom: 30px;
+            padding-left: 20px;
+            border-left: 5px solid #ff5e62;
+            background: linear-gradient(90deg, rgba(255, 94, 98, 0.1), transparent);
+            padding: 10px 20px;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .description {
+            color: #b0b0c0;
+            line-height: 1.9;
+            font-size: 1.05rem;
+            margin-bottom: 25px;
+            text-align: justify;
+        }
+
+        .description strong {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        /* Advanced Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-top: 40px;
+            margin-bottom: 50px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Glass shine effect on cards */
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 100%);
+            opacity: 0;
+            transition: 0.4s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 94, 98, 0.4);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-title {
+            color: #fff;
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .feature-desc {
+            font-size: 0.95rem;
+            color: #999;
+            line-height: 1.6;
+        }
+
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(45deg, #ff5e62, #ff9966);
+            color: #fff;
+            padding: 16px 50px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.4s;
+            box-shadow: 0 10px 30px rgba(255, 94, 98, 0.3);
+            margin-top: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .contact-btn::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: linear-gradient(45deg, #ff9966, #ff5e62);
+            z-index: -1;
+            transition: 0.4s;
+            opacity: 0;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(255, 94, 98, 0.5);
+        }
+
+        .contact-btn:hover::after {
+            opacity: 1;
+        }
+
+        /* Bottom Languages Section */
+        .scoll-indicator {
+            text-align: center;
+            padding-bottom: 40px;
+        }
+
+        .scoll-indicator h4 {
+            display: inline-block;
+            border-bottom: 2px solid #ff5e62;
+            padding-bottom: 5px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            color: #888;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            main {
+                flex-direction: column;
+                padding: 50px 20px;
+                gap: 40px;
+                text-align: center;
+                align-items: center;
+            }
+
+            .image-container {
+                position: static;
+                width: 100%;
+                max-width: 350px;
+                height: 350px;
+            }
+
+            .content-container {
+                width: 100%;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                text-align: left;
+            }
+
+            .description {
+                text-align: left;
+            }
+
+            header {
+                padding: 20px;
+            }
+
+            .nav-links {
+                display: none;
+                /* simple mobile handling */
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">Ahmed Faza</div>
+        <!-- Replacing 'Portfolio' with Name or keeping generic Portfolio? Image says Portfolio, User might prefer Name. I'll stick to 'Portfolio' style but with user initials or just Portfolio? Let's use 'Portfolio' as per image but maybe 'AF Portfolio' -->
+        <!-- Image says "Portfolio" in stylized text. Let's use 'Portfolio' to be 'exact' -->
+        <!-- Actually, user usually wants their name. 'Ahmed Faza' looks better. But instruction says 'exact'. I'll use 'Portfolio' text but maybe style it. -->
+        <!-- Decided: "Portfolio" text to match image exactly. -->
+        <!-- <div class="logo">Portfolio</div> -->
+
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html" class="active">About</a>
+            <a href="education.html">Education</a>
+            <a href="skills.html">Skills</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Left Side Image -->
+        <div class="image-container">
+            <div class="image-circle">
+                <!-- Using the removebg preview for clean look against the pink circle -->
+                <img src="assets/profile-photo-removebg-preview.png" alt="Ahmed Faza"
+                    onerror="this.src='https://via.placeholder.com/250'">
+            </div>
+        </div>
+
+        <!-- Right Side Content -->
+        <div class="content-container">
+            <h1 class="about-title">About</h1>
+            <span class="subtitle">Designing Efficiency, Delivering Precision.</span>
+
+            <p class="description">
+                I don't just execute tasks; I engineer order out of chaos. As an Office Automation Specialist, I
+                leverage the full power of digital tools to transform raw inputs into structured, actionable business
+                assets. My approach combines technical speed with an analytical mindset, ensuring that every document,
+                spreadsheet, and report serves one strategic purpose: <strong>Growth</strong>.
+            </p>
+
+            <p class="description">
+                With a strong foundation in Microsoft Office ecosystems and advanced data logistics, I provide the
+                operational backbone that businesses need to thrive. Whether it's complex data analysis or high-volume
+                document control, I deliver results with 100% accuracy and confidentiality.
+            </p>
+
+            <h3 class="section-header">Core Capabilities</h3>
+            <div class="features-grid">
+                <!-- Feature 1 -->
+                <div class="feature-card">
+                    <div class="feature-title">Data Architecture</div>
+                    <p class="feature-desc">Structuring complex datasets for instant clarity and actionable insight
+                        using advanced Excel formulas.</p>
+                </div>
+                <!-- Feature 2 -->
+                <div class="feature-card">
+                    <div class="feature-title">Workflow Velocity</div>
+                    <p class="feature-desc">Eliminating bottlenecks through smart automation techniques and shortcut
+                        mastery to reduce turnaround time.</p>
+                </div>
+                <!-- Feature 3 -->
+                <div class="feature-card">
+                    <div class="feature-title">Document Integrity</div>
+                    <p class="feature-desc">Ensuring absolute compliance with corporate branding and formatting
+                        standards across all digital archives.</p>
+                </div>
+                <!-- Feature 4 -->
+                <div class="feature-card">
+                    <div class="feature-title">Strategic Admin</div>
+                    <p class="feature-desc">Proactive management of correspondence, scheduling, and digital resources to
+                        keep operations seamless.</p>
+                </div>
+            </div>
+
+            <a href="contact.html" class="contact-btn">Discuss Your Project</a>
+        </div>
+    </main>
+
+    <div class="scoll-indicator">
+        <h4>Languages</h4>
+    </div>
+
+</body>
+
+</html>

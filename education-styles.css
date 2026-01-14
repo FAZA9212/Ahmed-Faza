@@ -1,0 +1,411 @@
+/* === NEW EDUCATION / JOURNEY STYLES === */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes lineGrow {
+    0% {
+        height: 0;
+    }
+
+    100% {
+        height: 100%;
+    }
+}
+
+.journey-section {
+    padding: 8rem 0;
+    min-height: 100vh;
+    background: radial-gradient(circle at 50% 10%, rgba(0, 188, 212, 0.05), transparent 40%);
+}
+
+.journey-header {
+    text-align: center;
+    margin-bottom: 6rem;
+    animation: fadeInUp 1s ease-out;
+}
+
+.journey-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    background: linear-gradient(to right, #fff, #b0b8c6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: -1px;
+}
+
+.journey-title span {
+    color: #00bcd4;
+    /* Fallback */
+    background: linear-gradient(to right, #00d2ff, #3a7bd5);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.journey-subtitle {
+    color: #aab2c0;
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.journey-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4rem;
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Vertical Line for Desktop - Re-enabled & Advanced */
+.journey-container::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    background: rgba(255, 255, 255, 0.05);
+    top: 50px;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-2px);
+    border-radius: 4px;
+    box-shadow: 0 0 15px rgba(0, 188, 212, 0.1);
+}
+
+/* Progressive Line Fill */
+.journey-container::before {
+    content: '';
+    position: absolute;
+    width: 4px;
+    background: linear-gradient(to bottom, #00d2ff, #3a7bd5);
+    top: 50px;
+    bottom: 50px;
+    /* Adjust dynamic height via JS normally, but static gradient here works */
+    left: 50%;
+    transform: translateX(-2px);
+    border-radius: 4px;
+    z-index: 0;
+    box-shadow: 0 0 20px rgba(0, 210, 255, 0.5);
+    animation: lineGrow 2s ease-out forwards;
+    transform-origin: top;
+}
+
+.journey-column-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 3.5rem;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.header-icon {
+    font-size: 2rem;
+    color: #00bcd4;
+    filter: drop-shadow(0 0 10px rgba(0, 188, 212, 0.4));
+}
+
+.timeline-box {
+    position: relative;
+    padding: 2.5rem;
+    background: rgba(16, 26, 41, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    margin-bottom: 4rem;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    backdrop-filter: blur(10px);
+    z-index: 1;
+    animation: fadeInUp 0.8s ease-out both;
+}
+
+.timeline-box::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+}
+
+.timeline-box:hover {
+    transform: translateY(-10px) scale(1.02);
+    background: rgba(22, 34, 55, 0.8);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 188, 212, 0.1);
+    border-color: rgba(0, 188, 212, 0.3);
+}
+
+/* Timeline Dot - Advanced */
+.timeline-dot {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #061121;
+    border: 4px solid #00bcd4;
+    border-radius: 50%;
+    right: -4.1rem;
+    /* Perfectly centered on 4rem gap + line width */
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    box-shadow: 0 0 0 5px rgba(0, 188, 212, 0.2);
+    transition: 0.3s;
+    display: block !important;
+    /* Re-enable */
+}
+
+.timeline-box:hover .timeline-dot {
+    background: #00bcd4;
+    box-shadow: 0 0 0 8px rgba(0, 188, 212, 0.3), 0 0 20px rgba(0, 188, 212, 0.6);
+}
+
+/* Left Column Specifics */
+.journey-column:first-child .timeline-box {
+    margin-right: 2rem;
+}
+
+/* Right Column Specifics */
+.journey-column:last-child .timeline-box {
+    margin-left: 2rem;
+}
+
+.journey-column:last-child .timeline-dot {
+    right: auto;
+    left: -4.1rem;
+}
+
+
+.timeline-date {
+    display: inline-block;
+    font-size: 0.85rem;
+    color: #fff;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    background: linear-gradient(90deg, #00bcd4, #00d2ff);
+    padding: 6px 15px;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(0, 210, 255, 0.3);
+}
+
+.timeline-degree {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+}
+
+.timeline-institute {
+    display: block;
+    font-size: 1rem;
+    color: #b0b8c6;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+    border-left: 3px solid #00bcd4;
+    padding-left: 10px;
+}
+
+.timeline-desc {
+    font-size: 0.95rem;
+    color: #aab2c0;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+.timeline-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.timeline-list li {
+    font-size: 0.9rem;
+    color: #aab2c0;
+    margin-bottom: 0.8rem;
+    padding-left: 25px;
+    position: relative;
+    transition: 0.2s;
+}
+
+.timeline-list li:hover {
+    color: #fff;
+    transform: translateX(5px);
+}
+
+.timeline-list li::before {
+    content: '▹';
+    color: #00bcd4;
+    position: absolute;
+    left: 0;
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+.skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.skill-tags span {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    color: #e0e0e0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s;
+}
+
+.skill-tags span:hover {
+    background: rgba(0, 188, 212, 0.15);
+    border-color: #00bcd4;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+/* Animation Delays for cascades */
+.journey-column:first-child .timeline-box:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.journey-column:first-child .timeline-box:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+.journey-column:last-child .timeline-box:nth-child(1) {
+    animation-delay: 0.3s;
+}
+
+.journey-column:last-child .timeline-box:nth-child(2) {
+    animation-delay: 0.5s;
+}
+
+
+/* Footer Resume Section */
+.qualification__footer {
+    text-align: center;
+    margin-top: 6rem;
+    padding-top: 4rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.resume-text {
+    color: #888;
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+
+.download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    border: 2px solid #00bcd4;
+    color: #00bcd4;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.download-btn:hover {
+    background: #00bcd4;
+    color: #000;
+    box-shadow: 0 0 20px rgba(0, 188, 212, 0.4);
+    transform: translateY(-3px);
+}
+
+/* Footer Tagline */
+.footer__tagline {
+    color: #666;
+    font-style: italic;
+    margin-top: 15px;
+    font-size: 0.95rem;
+    opacity: 0.7;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .journey-container {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        padding-left: 50px;
+        /* Space for line on left */
+    }
+
+    .journey-container::after,
+    .journey-container::before {
+        left: 20px;
+        /* Move line to left */
+    }
+
+    .journey-column:first-child .timeline-box,
+    .journey-column:last-child .timeline-box {
+        margin: 0;
+        margin-left: 1rem;
+    }
+
+    .timeline-dot,
+    .journey-column:last-child .timeline-dot {
+        left: -4.3rem;
+        /* Adjust to hit the line */
+        right: auto;
+    }
+
+    .journey-column-title {
+        justify-content: flex-start;
+        padding-left: 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .journey-section {
+        padding: 4rem 0;
+    }
+
+    .journey-title {
+        font-size: 2.5rem;
+    }
+
+    .journey-container {
+        padding-left: 15px;
+    }
+
+    .journey-container::after,
+    .journey-container::before {
+        display: none;
+    }
+
+    .timeline-dot {
+        display: none !important;
+    }
+
+    .journey-column:first-child .timeline-box,
+    .journey-column:last-child .timeline-box {
+        margin-left: 0;
+    }
+
+    .journey-column-title {
+        justify-content: center;
+        padding-left: 0;
+    }
+}

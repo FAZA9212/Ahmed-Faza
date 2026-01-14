@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Ahmed Faza</title>
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Outfit:wght@200;300;400;500;600&display=swap"
+        rel="stylesheet">
+    <!-- Remix Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+
+    <style>
+        /* Reset & Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-color: #0b0c15;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --accent-gold: #ffd700;
+            --accent-gold-glow: rgba(255, 215, 0, 0.4);
+            --text-main: #ffffff;
+            --text-muted: #aab2c0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(255, 215, 0, 0.03), transparent 25%),
+                radial-gradient(circle at 90% 80%, rgba(100, 149, 237, 0.03), transparent 25%);
+            color: var(--text-main);
+            font-family: 'Outfit', sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Animated Background Blobs */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.01), transparent 60%);
+            animation: rotateBG 20s linear infinite;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        @keyframes rotateBG {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Fixed Navigation Sidebar */
+        .nav-menu {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            background: rgba(15, 17, 26, 0.6);
+            padding: 2.5rem 1.2rem;
+            border-radius: 50px;
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            transition: all 0.4s ease;
+        }
+
+        .nav-menu:hover {
+            border-color: rgba(255, 215, 0, 0.2);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8);
+        }
+
+        .nav-menu a {
+            font-size: 0.8rem;
+            font-weight: 500;
+            opacity: 0.6;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            writing-mode: horizontal-tb;
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 30px;
+            transition: all 0.4s;
+            position: relative;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            opacity: 1;
+            color: #0b0c15;
+            background: var(--accent-gold);
+            transform: scale(1.1);
+            font-weight: 700;
+            box-shadow: 0 0 20px var(--accent-gold-glow);
+        }
+
+        /* Sidebar Socials */
+        .social-sidebar {
+            position: fixed;
+            left: 3.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+            z-index: 10;
+        }
+
+        .social-sidebar a {
+            font-size: 1.3rem;
+            opacity: 0.4;
+            color: #fff;
+            position: relative;
+        }
+
+        .social-sidebar a::after {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--accent-gold);
+            transition: 0.3s;
+        }
+
+        .social-sidebar a:hover {
+            opacity: 1;
+            color: var(--accent-gold);
+            transform: translateX(5px);
+        }
+
+        .social-sidebar a:hover::after {
+            width: 5px;
+        }
+
+        /* Header */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2.5rem 5rem;
+            width: 100%;
+            z-index: 50;
+        }
+
+        .brand-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 1px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .brand-logo span {
+            color: var(--accent-gold);
+            font-style: italic;
+        }
+
+        .cv-link {
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            opacity: 0.7;
+            padding: 10px 20px;
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cv-link:hover {
+            opacity: 1;
+            border-color: var(--accent-gold);
+            background: rgba(255, 215, 0, 0.05);
+            color: var(--accent-gold);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.1);
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            perspective: 1000px;
+            /* Enable 3D perspective */
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            width: 100%;
+            max-width: 1100px;
+            background: rgba(20, 22, 35, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+            animation: fadeIn Up 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease-out;
+            /* Smooth tilt */
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Light Glare Effect Overlay */
+        .contact-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(125deg, rgba(255, 255, 255, 0.05) 0%, transparent 40%, transparent 100%);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* Left Column: Form */
+        .contact-form-section {
+            padding: 4rem;
+            position: relative;
+            z-index: 3;
+        }
+
+        .contact-form-section h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #fff, #ccc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .contact-form-section p {
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            max-width: 90%;
+        }
+
+        /* Floating Label Inputs */
+        .form-group {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .clean-input {
+            width: 100%;
+            padding: 15px 0;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .clean-input::placeholder {
+            color: transparent;
+            /* Hide placeholder for floating effect */
+        }
+
+        .clean-input:focus {
+            border-bottom-color: var(--accent-gold);
+        }
+
+        .form-label {
+            position: absolute;
+            top: 15px;
+            left: 0;
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.5);
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        /* Label floats up when input focused or has value */
+        .clean-input:focus+.form-label,
+        .clean-input:not(:placeholder-shown)+.form-label {
+            top: -10px;
+            font-size: 0.8rem;
+            color: var(--accent-gold);
+        }
+
+        /* Select box specific fix */
+        select.clean-input {
+            color: #fff;
+            padding: 15px 0;
+        }
+
+        select.clean-input option {
+            background: #0b0c15;
+        }
+
+        .submit-btn {
+            padding: 15px 40px;
+            background: transparent;
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            border-radius: 4px;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background: var(--accent-gold);
+            transition: 0.4s;
+            z-index: -1;
+        }
+
+        .submit-btn:hover {
+            color: #0b0c15;
+            box-shadow: 0 0 20px var(--accent-gold-glow);
+        }
+
+        .submit-btn:hover::before {
+            width: 100%;
+        }
+
+        /* Right Column: Info */
+        .contact-info-section {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-left: 1px solid var(--glass-border);
+            position: relative;
+        }
+
+        .info-card {
+            margin-bottom: 3rem;
+            transition: transform 0.3s;
+        }
+
+        .info-card:hover {
+            transform: translateX(10px);
+        }
+
+        .icon-box {
+            font-size: 1.5rem;
+            color: var(--accent-gold);
+            margin-bottom: 0.8rem;
+            display: inline-block;
+            padding: 10px;
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .info-card h3 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 0.5rem;
+        }
+
+        .info-card p,
+        .info-card a {
+            font-size: 1.1rem;
+            color: #fff;
+            font-weight: 400;
+        }
+
+        .info-card a:hover {
+            color: var(--accent-gold);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+            }
+
+            .contact-info-section {
+                border-left: none;
+                border-top: 1px solid var(--glass-border);
+                padding: 3rem;
+            }
+
+            .nav-menu,
+            .social-sidebar {
+                display: none;
+            }
+
+            .page-header {
+                padding: 1.5rem 2rem;
+            }
+
+            .contact-form-section {
+                padding: 2.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page-header">
+        <a href="index.html" class="brand-logo">Ahmed<span>Faza</span></a>
+        <div class="header-actions">
+            <a href="#" class="cv-link"><i class="ri-download-line"></i> Resume</a>
+        </div>
+    </div>
+
+    <nav class="nav-menu">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="education.html">Education</a>
+        <a href="skills.html">Skills</a>
+        <a href="contact.html" class="active">Contact</a>
+    </nav>
+
+    <aside class="social-sidebar">
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#"><i class="fab fa-github"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fa-solid fa-envelope"></i></a>
+    </aside>
+
+    <main id="main-scene">
+        <div class="contact-container" id="tilt-card">
+            <!-- Left: Form -->
+            <div class="contact-form-section">
+                <h1>Let's Start a Project</h1>
+                <p>Have a vision for your office automation? I'm here to translate your operational needs into efficient
+                    digital workflows.</p>
+
+                <form class="contact-form-clean">
+                    <div class="form-group">
+                        <input type="text" class="clean-input" id="contactName" placeholder=" " required>
+                        <label for="contactName" class="form-label">Your Name</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="clean-input" id="contactEmail" placeholder=" " required>
+                        <label for="contactEmail" class="form-label">Email Address</label>
+                    </div>
+                    <div class="form-group">
+                        <!-- Select needs a value to work with placeholder-shown trick, but it's tricky with selects. 
+                             We'll use a standard label for select or a custom JS drop. keeping simple for now. -->
+                        <select class="clean-input" id="contactInterest" style="padding-top: 15px;">
+                            <option value="General Inquiry">General Inquiry</option>
+                            <option value="Job Opportunity">Job Opportunity</option>
+                            <option value="Consultation">Consultation</option>
+                        </select>
+                        <label class="form-label"
+                            style="top: -10px; font-size: 0.8rem; color: var(--accent-gold);">Subject</label>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="clean-input" rows="3" id="contactMessage" placeholder=" " required></textarea>
+                        <label for="contactMessage" class="form-label">Tell me about your project...</label>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message <i class="ri-arrow-right-line"
+                            style="vertical-align: middle; margin-left: 5px;"></i></button>
+                </form>
+            </div>
+
+            <!-- Right: Info -->
+            <div class="contact-info-section">
+                <div class="info-card">
+                    <div class="icon-box"><i class="ri-mail-open-line"></i></div>
+                    <h3>Chat with me</h3>
+                    <p><a href="mailto:fazarasha7@gmail.com">fazarasha7@gmail.com</a></p>
+                </div>
+
+                <div class="info-card">
+                    <div class="icon-box"><i class="ri-phone-line"></i></div>
+                    <h3>Call me</h3>
+                    <p>(+91) 9526557835</p>
+                </div>
+
+                <div class="info-card">
+                    <div class="icon-box"><i class="ri-map-pin-line"></i></div>
+                    <h3>Visit me</h3>
+                    <p>Kasaragod, Kerala<br><span style="font-size: 0.9rem; opacity: 0.7;">671121, India</span></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Ahmed Faza. Crafted with precision.</p>
+    </footer>
+
+    <!-- Script for WhatsApp Form & 3D Tilt -->
+    <script>
+        // WhatsApp Logic
+        document.querySelector('.contact-form-clean').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const name = document.getElementById('contactName').value;
+            const email = document.getElementById('contactEmail').value;
+            const interest = document.getElementById('contactInterest').value;
+            const message = document.getElementById('contactMessage').value;
+
+            const phonenumber = "919526557835";
+
+            const text = `*New Inquiry from Portfolio* %0A%0A` +
+                `*Name:* ${name} %0A` +
+                `*Email:* ${email} %0A` +
+                `*Subject:* ${interest} %0A` +
+                `*Message:* ${message}`;
+
+            const url = `https://wa.me/${phonenumber}?text=${text}`;
+
+            window.open(url, '_blank').focus();
+        });
+
+        // 3D Tilt Effect
+        const container = document.getElementById('main-scene');
+        const card = document.getElementById('tilt-card');
+
+        container.addEventListener('mousemove', (e) => {
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+            card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+        });
+
+        container.addEventListener('mouseenter', () => {
+            card.style.transition = 'none';
+        });
+
+        container.addEventListener('mouseleave', () => {
+            card.style.transition = 'all 0.5s ease';
+            card.style.transform = `rotateY(0deg) rotateX(0deg)`;
+        });
+    </script>
+</body>
+
+</html>
