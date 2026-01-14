@@ -8,6 +8,8 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
+    <!-- Remix Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
 
     <style>
         * {
@@ -413,10 +415,25 @@
         }
 
         /* Responsive */
+        /* Menu Toggle */
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            color: #fff;
+            cursor: pointer;
+            z-index: 1100;
+            background: rgba(255, 94, 98, 0.2);
+            padding: 8px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 94, 98, 0.4);
+        }
+
+        /* Responsive */
         @media (max-width: 968px) {
             main {
                 flex-direction: column;
-                padding: 50px 20px;
+                padding: 100px 20px 50px;
+                /* Added top padding */
                 gap: 40px;
                 text-align: center;
                 align-items: center;
@@ -425,8 +442,9 @@
             .image-container {
                 position: static;
                 width: 100%;
-                max-width: 350px;
-                height: 350px;
+                max-width: 300px;
+                height: 300px;
+                margin-top: 20px;
             }
 
             .content-container {
@@ -444,11 +462,41 @@
 
             header {
                 padding: 20px;
+                justify-content: space-between;
+                position: relative;
+            }
+
+            .menu-toggle {
+                display: block;
             }
 
             .nav-links {
-                display: none;
-                /* simple mobile handling */
+                display: flex;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: rgba(10, 10, 20, 0.98);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transform: translateX(100%);
+                border-radius: 0;
+                border: none;
+                right: auto;
+                padding: 0;
+            }
+
+            .nav-links.active {
+                transform: translateX(0);
+            }
+
+            .nav-links a {
+                width: 100%;
+                text-align: center;
+                padding: 20px;
+                font-size: 1.2rem;
             }
         }
     </style>
@@ -537,6 +585,33 @@
         <h4>Languages</h4>
     </div>
 
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (menuToggle && navLinks) {
+            menuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                const icon = menuToggle.querySelector('i');
+                if (navLinks.classList.contains('active')) {
+                    icon.classList.remove('ri-menu-3-line');
+                    icon.classList.add('ri-close-line');
+                } else {
+                    icon.classList.remove('ri-close-line');
+                    icon.classList.add('ri-menu-3-line');
+                }
+            });
+
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    const icon = menuToggle.querySelector('i');
+                    icon.classList.remove('ri-close-line');
+                    icon.classList.add('ri-menu-3-line');
+                });
+            });
+        }
+    </script>
 </body>
 
 </html>

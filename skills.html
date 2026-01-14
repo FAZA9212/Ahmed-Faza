@@ -455,6 +455,18 @@
             }
         }
 
+        /* Menu Toggle */
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            color: #e6a598;
+            cursor: pointer;
+            padding: 8px;
+            border: 1px solid rgba(230, 165, 152, 0.3);
+            border-radius: 50%;
+            margin-left: 10px;
+        }
+
         @media (max-width: 900px) {
             .right-content {
                 grid-template-columns: 1fr;
@@ -474,10 +486,53 @@
 
             header {
                 padding: 1.5rem 2rem;
+                justify-content: space-between;
+            }
+
+            .cv-link,
+            .contact-btn {
+                display: none;
+                /* Simplify header on small screens */
+            }
+
+            /* Keep toggle visible */
+            .menu-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
 
             .nav-menu {
-                display: none;
+                display: flex;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: rgba(13, 48, 54, 0.98);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transform: translateX(100%);
+                transition: transform 0.4s ease;
+                right: auto;
+                border-radius: 0;
+                border: none;
+                z-index: 999;
+                padding: 0;
+            }
+
+            .nav-menu.active {
+                transform: translateX(0);
+            }
+
+            .nav-menu a {
+                border-radius: 0;
+                width: 100%;
+                text-align: center;
+                padding: 20px;
+                background: transparent;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             }
         }
 
@@ -547,6 +602,9 @@
         <div class="header-right">
             <a href="#" class="cv-link"><i class="ri-download-line"></i> Download CV</a>
             <a href="contact.html" class="contact-btn">Contact Me</a>
+            <div class="menu-toggle">
+                <i class="ri-menu-3-line"></i>
+            </div>
         </div>
     </header>
 
@@ -712,6 +770,33 @@
         <span class="portfolio-label">Portfolio</span>
     </aside>
 
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+
+        if (menuToggle && navMenu) {
+            menuToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                const icon = menuToggle.querySelector('i');
+                if (navMenu.classList.contains('active')) {
+                    icon.classList.remove('ri-menu-3-line');
+                    icon.classList.add('ri-close-line');
+                } else {
+                    icon.classList.remove('ri-close-line');
+                    icon.classList.add('ri-menu-3-line');
+                }
+            });
+
+            navMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                    const icon = menuToggle.querySelector('i');
+                    icon.classList.remove('ri-close-line');
+                    icon.classList.add('ri-menu-3-line');
+                });
+            });
+        }
+    </script>
 </body>
 
 </html>

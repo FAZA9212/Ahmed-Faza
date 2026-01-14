@@ -451,6 +451,19 @@
         }
 
         /* Responsive */
+        /* Menu Toggle */
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--accent-gold);
+            cursor: pointer;
+            padding: 5px 10px;
+            border: 1px solid var(--glass-border);
+            border-radius: 5px;
+            margin-left: 10px;
+        }
+
+        /* Responsive */
         @media (max-width: 968px) {
             .contact-container {
                 grid-template-columns: 1fr;
@@ -463,9 +476,21 @@
                 padding: 3rem;
             }
 
-            .nav-menu,
             .social-sidebar {
                 display: none;
+            }
+
+            .header-actions {
+                display: flex;
+                align-items: center;
+            }
+
+            .cv-link {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
             }
 
             .page-header {
@@ -474,6 +499,37 @@
 
             .contact-form-section {
                 padding: 2.5rem;
+            }
+
+            .nav-menu {
+                display: flex;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: rgba(11, 12, 21, 0.98);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transform: translateX(100%);
+                transition: transform 0.4s ease;
+                right: auto;
+                border-radius: 0;
+                border: none;
+                z-index: 999;
+                padding: 0;
+            }
+
+            .nav-menu.active {
+                transform: translateX(0);
+            }
+
+            .nav-menu a {
+                font-size: 1.3rem;
+                padding: 15px;
+                width: 100%;
+                text-align: center;
             }
         }
     </style>
@@ -485,6 +541,9 @@
         <a href="index.html" class="brand-logo">Ahmed<span>Faza</span></a>
         <div class="header-actions">
             <a href="#" class="cv-link"><i class="ri-download-line"></i> Resume</a>
+            <div class="menu-toggle">
+                <i class="ri-menu-3-line"></i>
+            </div>
         </div>
     </div>
 
@@ -609,6 +668,33 @@
             card.style.transition = 'all 0.5s ease';
             card.style.transform = `rotateY(0deg) rotateX(0deg)`;
         });
+
+        // Mobile Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+
+        if (menuToggle && navMenu) {
+            menuToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                const icon = menuToggle.querySelector('i');
+                if (navMenu.classList.contains('active')) {
+                    icon.classList.remove('ri-menu-3-line');
+                    icon.classList.add('ri-close-line');
+                } else {
+                    icon.classList.remove('ri-close-line');
+                    icon.classList.add('ri-menu-3-line');
+                }
+            });
+
+            navMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                    const icon = menuToggle.querySelector('i');
+                    icon.classList.remove('ri-close-line');
+                    icon.classList.add('ri-menu-3-line');
+                });
+            });
+        }
     </script>
 </body>
 

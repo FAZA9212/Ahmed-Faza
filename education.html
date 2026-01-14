@@ -146,12 +146,69 @@
             /* Space for sidebar */
         }
 
+        /* Mobile Menu */
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            color: #00bcd4;
+            cursor: pointer;
+            padding: 5px;
+            border: 1px solid rgba(0, 188, 212, 0.3);
+            border-radius: 5px;
+        }
+
         @media (max-width: 968px) {
-            .nav-menu {
-                display: none;
+            .header-top {
+                padding: 1.5rem 2rem;
+                background: rgba(6, 17, 33, 0.95);
+                /* Ensure visibility */
+                backdrop-filter: blur(10px);
             }
 
-            /* Use mobile nav from main.css if needed, or hide for now */
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                display: flex;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: rgba(6, 17, 33, 0.98);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 2rem;
+                transform: translateX(100%);
+                transition: transform 0.4s ease;
+                right: auto;
+                top: 0;
+                border-radius: 0;
+                border: none;
+                z-index: 999;
+            }
+
+            .nav-menu.active {
+                transform: translateX(0);
+            }
+
+            .nav-menu a {
+                font-size: 1.3rem;
+                padding: 15px;
+                width: 100%;
+                text-align: center;
+            }
+
+            main.main {
+                padding-right: 0;
+                padding-top: 8rem;
+            }
+
+            .journey-container {
+                flex-direction: column;
+            }
         }
     </style>
 
@@ -160,6 +217,9 @@
         <a href="index.html" class="brand-logo">
             <i class="ri-user-smile-line"></i>Ahmed<span>Faza</span>
         </a>
+        <div class="menu-toggle">
+            <i class="ri-menu-3-line"></i>
+        </div>
     </div>
 
     <!-- Right Fixed Navigation -->
@@ -305,6 +365,35 @@
 
     <!--=================== Main JS ====================-->
     <script src="assets/js/main.js"></script>
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+
+        if (menuToggle && navMenu) {
+            menuToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                const icon = menuToggle.querySelector('i');
+                if (navMenu.classList.contains('active')) {
+                    icon.classList.remove('ri-menu-3-line');
+                    icon.classList.add('ri-close-line');
+                } else {
+                    icon.classList.remove('ri-close-line');
+                    icon.classList.add('ri-menu-3-line');
+                }
+            });
+
+            // Close menu when clicking a link
+            navMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                    const icon = menuToggle.querySelector('i');
+                    icon.classList.remove('ri-close-line');
+                    icon.classList.add('ri-menu-3-line');
+                });
+            });
+        }
+    </script>
 </body>
 
 </html>
